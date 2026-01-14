@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
         className={`${outfit.variable} font-sans antialiased bg-white text-slate-900`}
       >
         <Navbar />
-        <main className="min-h-screen pt-24">{children}</main>
+        <main className="min-h-screen pt-20">{children}</main>
         <Footer />
         <BackToTop />
       </body>

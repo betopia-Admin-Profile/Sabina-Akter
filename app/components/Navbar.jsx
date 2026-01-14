@@ -21,27 +21,23 @@ export default function Navbar() {
     { name: "ECOSYSTEM", href: "#ecosystem" },
     { name: "VISION", href: "#vision" },
     { name: "NEWS", href: "#news" },
-    { name: "BIOGRAPHY", href: "/biography" },
   ];
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-            ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
-            : "bg-transparent py-6"
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${scrolled
+          ? "bg-white/90 backdrop-blur-md shadow-sm py-5"
+          : "bg-transparent py-7"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           {/* Logo Section */}
           <Link href="/" className="group z-50 relative">
             <div className="flex flex-col">
-              <h1 className="text-2xl font-bold tracking-widest text-slate-900 group-hover:opacity-80 transition-opacity">
-                SABINA AKTER
+              <h1 className="text-2xl font-bold text-slate-900 group-hover:opacity-80 transition-opacity">
+                SABINA <span className="text-red-500 italic">AKTER</span>
               </h1>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">
-                Chairperson, Betopia Group
-              </span>
             </div>
           </Link>
 
@@ -51,7 +47,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-xs font-bold tracking-widest text-slate-600 hover:text-gold transition-colors uppercase"
+                className="text-sm font-bold tracking-widest text-slate-600 hover:text-gold transition-colors uppercase"
               >
                 {link.name}
               </Link>

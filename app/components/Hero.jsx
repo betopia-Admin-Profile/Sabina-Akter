@@ -70,7 +70,7 @@ export default function Hero() {
 
           {/* Social Links & CTA */}
           <div className="flex flex-col lg:flex-row items-center gap-8 pt-4 justify-center lg:justify-start">
-            <a href="/contact" className="px-8 py-4 text-sm font-bold tracking-widest transition-all duration-300">
+            <a href="/contact" className="py-4 text-sm font-bold tracking-widest transition-all duration-300">
               CONNECT WITH ME
             </a>
             <div className="flex gap-4 lg:border-l border-slate-200 lg:pl-8">
