@@ -1,0 +1,33 @@
+"use client";
+import { FaQuoteLeft } from "react-icons/fa";
+
+export default function ChairmanMessage() {
+  return (
+    <section className="py-24 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-900 via-gold to-slate-900"></div>
+
+      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <FaQuoteLeft className="text-4xl text-gold mx-auto mb-8 opacity-50" />
+
+        <h2 className="text-3xl md:text-5xl font-serif leading-tight text-slate-900 mb-10">
+          "Human potential is the most powerful force behind progress. Our mission is not just business growth—it is to <span className="text-gold italic">create jobs</span>, <span className="text-gold italic">empower youth</span>, and champion <span className="text-gold italic">women’s leadership</span>."
+        </h2>
+
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-1 w-20 bg-slate-900 rounded-full mb-4"></div>
+          <h4 className="text-xl font-bold text-slate-900 uppercase tracking-widest">
+            Sabina Akter
+          </h4>
+          <p className="text-sm font-semibold text-slate-500 uppercase tracking-[0.2em]">
+            Chairperson, Betopia Group
+          </p>
+        </div>
+      </div>
+
+      {/* Background Watermark */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-bold text-slate-900/[0.03] select-none pointer-events-none whitespace-nowrap">
+        BETOPIA
+      </div>
+    </section>
+  );
+}
