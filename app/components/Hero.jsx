@@ -18,7 +18,7 @@ export default function Hero() {
             <path fill="currentColor" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.5,70.8,32.4C59.4,43.3,47.9,52.2,35.6,60.7C23.3,69.2,10.2,77.3,-1.9,80.6C-14,83.9,-20.9,82.4,-31.1,75.9C-41.3,69.4,-54.8,57.9,-64.5,45.4C-74.2,32.9,-80.1,19.4,-81.4,5.3C-82.7,-8.8,-79.4,-23.5,-71.2,-35.8C-63,-48.1,-49.9,-58,-36.5,-65.7C-23.1,-73.4,-9.4,-78.9,4.4,-86.5L18.2,-94.1" transform="translate(100 100)" />
           </svg>
 
-          <div className="relative h-full w-[90%] lg:w-full rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 group border-[6px] border-white animate-float">
+          <div className="relative h-full w-[98%] lg:w-full rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 group border-[6px] border-white animate-float">
             <Image
               src="https://i.postimg.cc/P5R6X9q2/chairman_betopia.webp"
               alt="Sabina Akter - Chairperson"
@@ -51,7 +51,7 @@ export default function Hero() {
         <div className="order-2 lg:order-1 space-y-8 animate-fade-in-up" style={{ animationDelay: "200ms" }}>
           {/* Heading */}
           <div className="space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl lg:text-7xl font-bold text-slate-900 leading-[1.1] tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-[1.1] tracking-tight">
               Empowering <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">
                 People Through
@@ -63,21 +63,21 @@ export default function Hero() {
                 </svg>
               </span>
             </h1>
-            <p className="text-base lg:text-lg text-slate-600 max-w-lg font-light leading-relaxed mx-auto lg:mx-0">
+            <p className="text-md md:text-lg text-slate-600 max-w-lg leading-relaxed mx-auto lg:mx-0">
               <strong className="text-slate-900 font-semibold">Sabina Akter</strong> represents the new era of leadership—combining grace with grit. She is dedicated to empowering women and youth, building sustainable ecosystems, and driving national growth through the <span className="text-navy-900 font-medium">Betopia Group</span>.
             </p>
           </div>
 
           {/* Social Links & CTA */}
           <div className="flex flex-col lg:flex-row items-center gap-8 pt-4 justify-center lg:justify-start">
-            <a href="#contact" className="px-8 py-4 bg-slate-900 text-white text-sm font-bold tracking-widest rounded-full hover:bg-gold hover:text-white transition-all duration-300 shadow-xl shadow-slate-900/10 transform hover:-translate-y-1">
+            <a href="/contact" className="px-8 py-4 text-sm font-bold tracking-widest transition-all duration-300">
               CONNECT WITH ME
             </a>
             <div className="flex gap-4 lg:border-l border-slate-200 lg:pl-8">
               {[FaLinkedinIn, FaFacebookF, FaInstagram, FaTwitter].map((Icon, idx) => (
                 <a
                   key={idx}
-                  href="#"
+                  href="/contact"
                   className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-500 hover:text-gold hover:border-gold transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                   <Icon size={14} />

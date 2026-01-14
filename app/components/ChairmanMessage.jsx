@@ -1,5 +1,6 @@
 "use client";
 import { FaQuoteLeft } from "react-icons/fa";
+import { TypeAnimation } from 'react-type-animation';
 
 export default function ChairmanMessage() {
   return (
@@ -9,9 +10,18 @@ export default function ChairmanMessage() {
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <FaQuoteLeft className="text-4xl text-gold mx-auto mb-8 opacity-50" />
 
-        <h2 className="text-3xl md:text-5xl font-serif leading-tight text-slate-900 mb-10">
-          "Human potential is the most powerful force behind progress. Our mission is not just business growth—it is to <span className="text-gold italic">create jobs</span>, <span className="text-gold italic">empower youth</span>, and champion <span className="text-gold italic">women’s leadership</span>."
-        </h2>
+        <div className="text-3xl md:text-5xl font-serif leading-tight text-slate-900 mb-10 min-h-[150px]">
+          <TypeAnimation
+            sequence={[
+              '"Human potential is the most powerful force behind progress. Our mission is not just business growth—it is to create jobs, empower youth, and champion women’s leadership."',
+              1000,
+            ]}
+            wrapper="span"
+            speed={65}
+            style={{ display: 'inline-block' }}
+            cursor={true}
+          />
+        </div>
 
         <div className="flex flex-col items-center gap-2">
           <div className="h-1 w-20 bg-slate-900 rounded-full mb-4"></div>

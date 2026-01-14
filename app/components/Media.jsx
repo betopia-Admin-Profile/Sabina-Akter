@@ -40,9 +40,6 @@ export default function NewsSection() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="space-y-4 max-w-2xl">
-            <span className="px-4 py-2 rounded-full border border-slate-100 bg-slate-50 text-gold text-xs font-bold tracking-[0.2em] uppercase">
-              Latest Updates
-            </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
               News & <span className="text-slate-400 font-serif italic">Insights</span>
             </h2>

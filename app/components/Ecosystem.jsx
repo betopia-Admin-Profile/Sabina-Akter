@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FaGlobe, FaArrowRight } from "react-icons/fa";
+import { useInView } from "react-intersection-observer";
 
 const ventures = [
   {
@@ -136,6 +137,10 @@ const ventures = [
 
 export default function Ecosystem() {
   const [activeTab, setActiveTab] = useState("All");
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   // Extract unique categories
   const categories = ["All", ...new Set(ventures.map(v => v.category))];
@@ -181,7 +186,11 @@ export default function Ecosystem() {
         </div>
 
         {/* Ventures Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          ref={ref}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+        >
           {filteredVentures.map((venture, idx) => (
             <a
               key={idx}
@@ -231,7 +240,6 @@ export default function Ecosystem() {
             </a>
           ))}
         </div>
-
       </div>
     </section>
   );
