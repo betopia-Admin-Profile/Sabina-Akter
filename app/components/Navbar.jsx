@@ -16,11 +16,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "ABOUT", href: "#about" },
-    { name: "JOURNEY", href: "#journey" },
-    { name: "ECOSYSTEM", href: "#ecosystem" },
-    { name: "VISION", href: "#vision" },
-    { name: "NEWS", href: "#news" },
+    { name: "ABOUT", href: "/about" },
+    { name: "JOURNEY", href: "/journey" },
+    { name: "ECOSYSTEM", href: "/ecosystem" },
+    { name: "VISION", href: "/vision" },
+    { name: "NEWS", href: "/news" },
   ];
 
   return (
