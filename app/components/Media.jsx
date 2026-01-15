@@ -1,33 +1,11 @@
 "use client";
 import Link from "next/link";
 import { FaArrowRight, FaCalendarAlt } from "react-icons/fa";
+import newsData from '../data/News.json';
+import Image from "next/image";
 
-const newsItems = [
-  {
-    id: "leadership-women-tech",
-    title: "Leadership in Tech: An Exclusive Interview with Sabina Akter",
-    summary: "Sabina Akter discusses the pivotal role of women in shaping Bangladesh's digital economy and her journey to becoming a tech leader.",
-    date: "May 15, 2024",
-    category: "Interview",
-    image: "https://i.postimg.cc/k4kMkwfK/360-F-615993633-8-Xw8-Hw-W1w-T4-Pj-Sg-Fk-Yd-Zt-B1-Z0-Tf-E1-P0-Q.jpg", // Placeholder or generic tech meeting image
-  },
-  {
-    id: "national-ict-award-2023",
-    title: "Betopia Group Wins National ICT Award 2023",
-    summary: "Recognized for outstanding contribution to the IT industry, Betopia Group takes home the prestigious award for youth employment impact.",
-    date: "December 10, 2023",
-    category: "Award",
-    image: "https://i.postimg.cc/FR4x008j/award-ceremony.jpg", // Placeholder
-  },
-  {
-    id: "women-empowerment-initiative",
-    title: "Breaking Barriers: 5,000+ Women Trained",
-    summary: "How the 'She Power' initiative by Betopia Group is creating equal opportunities for women in rural Bangladesh.",
-    date: "March 8, 2024",
-    category: "Social Impact",
-    image: "https://i.postimg.cc/q7dJ6dFz/women-tech.jpg", // Placeholder
-  },
-];
+const NewsItems = newsData.newsItems;
+
 
 export default function NewsSection() {
   return (
@@ -55,7 +33,7 @@ export default function NewsSection() {
 
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsItems.map((item) => (
+          {NewsItems.map((item) => (
             <Link
               key={item.id}
               href={`/news/${item.id}`}
@@ -65,9 +43,10 @@ export default function NewsSection() {
                 {/* Image Container with Zoom Effect */}
                 <div className="relative h-64 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-60 z-10"></div>
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
+                    fill
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
                   <span className="absolute top-6 left-6 z-20 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-bold tracking-wider text-white uppercase shadow-lg">
@@ -81,11 +60,11 @@ export default function NewsSection() {
                     <span>{item.date}</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-gold transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-gold transition-colors duration-300 line-clamp-2">
                     {item.title}
                   </h3>
 
-                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 mb-6 flex-grow">
+                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 mb-4 flex-grow">
                     {item.summary}
                   </p>
 

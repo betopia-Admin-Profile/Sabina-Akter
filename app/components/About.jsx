@@ -17,7 +17,7 @@ export default function About() {
         <div className={`relative group transition-all duration-1000 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
           <div className="relative h-[600px] w-full lg:w-[500px] rounded-[2rem] overflow-hidden border-[8px] border-slate-800 shadow-2xl">
             <Image
-              src="https://i.postimg.cc/P5R6X9q2/chairman_betopia.webp"
+              src="https://i.postimg.cc/jjdWsHc9/about-Img.jpg"
               alt="Sabina Akter"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"

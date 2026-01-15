@@ -11,7 +11,8 @@ const ventures = [
     desc: "Shaping Bangladesh’s digital future with ERP systems, AWS services, B2B/B2G platforms, and training programs fueling innovation.",
     category: "IT & Software",
     url: "https://bdcalling.com",
-    domain: "bdcalling.com"
+    domain: "bdcalling.com",
+    imageUrl: ""
   },
   {
     name: "Softvence LLC",
@@ -19,7 +20,8 @@ const ventures = [
     desc: "Turning ideas into sleek digital experiences from branding to web & mobile development helping businesses make their mark online.",
     category: "Creative Agency",
     url: "https://softvence.agency",
-    domain: "softvence.agency"
+    domain: "softvence.agency",
+    imageUrl: "https://i.postimg.cc/kMKqVVBk/10002.png"
   },
   {
     name: "Sparktech Agency",
@@ -27,7 +29,8 @@ const ventures = [
     desc: "Blending creativity and tech smarts to build everything from games to AI tools. Helping clients grow.",
     category: "Game & AI",
     url: "https://sparktech.agency",
-    domain: "sparktech.agency"
+    domain: "sparktech.agency",
+    imageUrl: "https://i.postimg.cc/zDK8LLy8/logo4.png"
   },
   {
     name: "SM Technology",
@@ -35,7 +38,8 @@ const ventures = [
     desc: "Delivering digital solutions that truly work from UI/UX to AI-powered apps supporting businesses worldwide.",
     category: "Technology",
     url: "https://smtech24.com",
-    domain: "smtech24.com"
+    domain: "smtech24.com",
+    imageUrl: "https://i.postimg.cc/KcBxKK12/logo5.png"
   },
   {
     name: "Backbencher Studio",
@@ -43,7 +47,8 @@ const ventures = [
     desc: "Crafting visual stories through branding, motion design, and digital strategies that connect with people and drive results.",
     category: "Design Studio",
     url: "https://backbencher.studio",
-    domain: "backbencher.studio"
+    domain: "backbencher.studio",
+    imageUrl: "https://i.postimg.cc/tRWp11sb/logo6.webp"
   },
   {
     name: "JVAI",
@@ -51,15 +56,17 @@ const ventures = [
     desc: "Bringing smart tech to life with AI-driven apps, chatbots, and custom platforms, solving real-world problems.",
     category: "AI Solutions",
     url: "https://joinventureai.com",
-    domain: "joinventureai.com"
+    domain: "joinventureai.com",
+    imageUrl: "https://i.postimg.cc/tJ3j8cK2/javi.jpg"
   },
   {
-    name: "ScaleUp Ads Agency",
+    name: "ScaleUp",
     role: "Subsidiary",
     desc: "Helping brands get seen with clean web design, sharp SEO, and ad campaigns across Meta, Google, and beyond.",
     category: "Marketing",
     url: "https://scaleupadsagency.com",
-    domain: "scaleupadsagency.com"
+    domain: "scaleupadsagency.com",
+    imageUrl: "https://i.postimg.cc/DfLnWW89/logo11.png"
   },
   {
     name: "ZenexCloud",
@@ -67,7 +74,8 @@ const ventures = [
     desc: "Powering businesses with secure hosting, cloud infrastructure, email, and domain services. Reliable digital backbone.",
     category: "Cloud Services",
     url: "https://zenexcloud.com",
-    domain: "zenexcloud.com"
+    domain: "zenexcloud.com",
+    imageUrl: "https://i.postimg.cc/PJWj07gW/logo13.png"
   },
   {
     name: "Bdcalling Academy",
@@ -75,7 +83,8 @@ const ventures = [
     desc: "More than just courses—it’s a launchpad. Offering hands-on projects, scholarships, and job placement to shape future developers.",
     category: "Education",
     url: "https://bdcalling.com",
-    domain: "bdcalling.com"
+    domain: "bdcalling.com",
+    imageUrl: "https://i.postimg.cc/Fzy4w6M0/bda_Logo.jpg"
   },
   {
     name: "Opsori Holdings Ltd",
@@ -83,7 +92,8 @@ const ventures = [
     desc: "Developing premium commercial spaces, retail hubs, and mixed-use projects built for growth and innovation.",
     category: "Real Estate",
     url: "https://opsori.com",
-    domain: "opsori.com"
+    domain: "opsori.com",
+    imageUrl: ""
   },
   {
     name: "Betopia PulseGrid Ltd",
@@ -91,7 +101,8 @@ const ventures = [
     desc: "Delivering smart energy solutions, power generation, grid systems, and spare parts. Mission: Smart Power. Stronger Nation.",
     category: "Energy",
     url: "https://betopiapulsegrid.com",
-    domain: "betopiapulsegrid.com"
+    domain: "betopiapulsegrid.com",
+    imageUrl: "https://i.postimg.cc/fycN1PG7/pg_Logo.png"
   },
   {
     name: "Bdcalling Enterprise",
@@ -99,7 +110,8 @@ const ventures = [
     desc: "Specializing in government tenders, OEM supply, and turnkey solutions serving Bangladesh’s infrastructure sectors.",
     category: "Government",
     url: "https://bdcallingenterprise.com",
-    domain: "bdcallingenterprise.com"
+    domain: "bdcallingenterprise.com",
+    imageUrl: "https://i.postimg.cc/cCRSPzpm/bde_Logo.png"
   },
   {
     name: "Claystone",
@@ -107,7 +119,8 @@ const ventures = [
     desc: "Providing high-quality architecture and design solutions from interiors and exteriors to detailed drawings.",
     category: "Architecture",
     url: "https://betopialimited.com",
-    domain: "betopialimited.com"
+    domain: "betopialimited.com",
+    imageUrl: ""
   },
   {
     name: "Betopia Cloud",
@@ -115,7 +128,8 @@ const ventures = [
     desc: "Enterprise-grade cloud and infrastructure services AWS, Azure, Google Cloud, and advanced IT solutions.",
     category: "Enterprise IT",
     url: "https://betopialimited.com",
-    domain: "betopialimited.com"
+    domain: "betopialimited.com",
+    imageUrl: ""
   },
   {
     name: "Pixelora Studio",
@@ -123,7 +137,8 @@ const ventures = [
     desc: "AI-powered creative solutions from branding and UX/UI design to logos and global digital presence development.",
     category: "Design",
     url: "https://pixelora.studio",
-    domain: "pixelora.studio"
+    domain: "pixelora.studio",
+    imageUrl: ""
   },
   {
     name: "FireAI",
@@ -131,7 +146,8 @@ const ventures = [
     desc: "Pioneering next-generation AI intelligent agents, autonomous workflow automation, and custom AI integrations.",
     category: "AI R&D",
     url: "https://fireai.agency",
-    domain: "fireai.agency"
+    domain: "fireai.agency",
+    imageUrl: ""
   },
 ];
 
@@ -199,24 +215,20 @@ export default function Ecosystem() {
               rel="noopener noreferrer"
               className="group bg-white rounded-[2rem] p-8 border border-slate-100 hover:border-gold/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col h-full"
             >
-              <div className="flex justify-between items-start mb-6">
+              <div className="flex justify-between items-start mb-8">
                 {/* Logo Placeholder / Image */}
-                <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 p-2 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                  <img
-                    src={`https://logo.clearbit.com/${venture.domain}?size=100`}
+                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 p-3 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                  <Image
+                    src={venture.imageUrl || `https://logo.clearbit.com/${venture.domain}?size=150`}
                     alt={venture.name}
-                    width={64}
-                    height={64}
-                    className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                    width={100}
+                    height={100}
+                    className="object-contain opacity-90 group-hover:opacity-100 transition-opacity"
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(venture.name)}&background=0F172A&color=fff&size=128&font-size=0.4`;
+                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(venture.name)}&background=0F172A&color=fff&size=200&font-size=0.4`;
                     }}
                   />
-                </div>
-
-                <div className="px-3 py-1 bg-slate-50 rounded-full border border-slate-100 text-[10px] font-bold tracking-wider text-slate-500 uppercase h-fit">
-                  {venture.category}
                 </div>
               </div>
 
