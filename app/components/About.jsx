@@ -74,7 +74,7 @@ export default function About() {
                   Impact
                 </span>
                 <p className="text-white font-bold leading-tight">
-                  3,500+ Local <br /> Jobs Created
+                  5000+ <br /> Jobs Created
                 </p>
               </div>
             </div>
