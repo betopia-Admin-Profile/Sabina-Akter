@@ -1,91 +1,64 @@
 name: Deploy Sabina Akter Portfolio
 
 on:
-  push:
-    branches: [ "main" ]
+    push:
+        branches: ["main"]
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+    build-and-deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: |
-          docker build -t sabina-akter:v1 -f Dockerfile .
+            - name: Build Docker image
+              run: |
+                  docker build -t sabina-akter:v1 -f Dockerfile .
 
-      - name: Setup SSH with Debugging
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}
-          SSH_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
-          SSH_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
-        run: |
-          # Create SSH directory and set permissions
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          
-          # Write the private key with proper formatting
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          # Remove any Windows line endings if present
-          sed -i 's/\r$//' ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          
-          # Generate public key from private key
-          ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
-          echo "Public key generated:"
-          cat ~/.ssh/id_rsa.pub
-          
-          # Configure SSH to use the key
-          cat >> ~/.ssh/config <<EOF
-          Host deploy-server
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/id_rsa
-            StrictHostKeyChecking no
-          EOF
-          
-          chmod 600 ~/.ssh/config
-          
-          # Test connection
-          echo "Testing SSH connection to $SSH_USER@$SSH_HOST"
-          ssh -vvv deploy-server "echo 'SSH test successful'; whoami; pwd"
-          
-          # Alternative test without config
-          echo "Testing direct connection..."
-          ssh -vvv -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
-            $SSH_USER@$SSH_HOST "echo 'Direct test'; whoami"
+            - name: Setup SSH
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}
+              run: |
+                  mkdir -p ~/.ssh
+                  chmod 700 ~/.ssh
 
-      - name: Save and Transfer Docker Image
-        env:
-          SSH_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
-          SSH_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
-        run: |
-          # Save Docker image
-          docker save sabina-akter:v1 -o sabina-akter-v1.tar
-          
-          # Transfer using SCP with explicit key
-          scp -v -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
-            sabina-akter-v1.tar \
-            $SSH_USER@$SSH_HOST:/tmp/
+                  # Write the private key
+                  echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
 
-      - name: Deploy on EC2
-        env:
-          SSH_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
-          SSH_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
-            $SSH_USER@$SSH_HOST "
-            # Deployment commands...
-            echo 'Starting deployment...'
-            sudo docker load -i /tmp/sabina-akter-v1.tar
-            sudo docker stop sabina-akter || true
-            sudo docker rm sabina-akter || true
-            sudo docker run -d \
-              --name sabina-akter \
-              --restart unless-stopped \
-              -p 3000:3000 \
-              sabina-akter:v1
-            echo 'Deployment complete!'
-          "
+                  # Add to SSH agent
+                  eval "$(ssh-agent -s)"
+                  ssh-add ~/.ssh/id_rsa
+
+                  # Test connection
+                  ssh -o StrictHostKeyChecking=no \
+                    ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} \
+                    "echo 'SSH connection successful'"
+
+            - name: Transfer and Deploy
+              env:
+                  SSH_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
+                  SSH_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
+              run: |
+                  # Save Docker image
+                  docker save sabina-akter:v1 -o sabina-akter-v1.tar
+
+                  # Transfer to EC2
+                  scp -o StrictHostKeyChecking=no \
+                    sabina-akter-v1.tar \
+                    $SSH_USER@$SSH_HOST:/tmp/
+
+                  # Deploy on EC2
+                  ssh -o StrictHostKeyChecking=no \
+                    $SSH_USER@$SSH_HOST "
+                    sudo docker load -i /tmp/sabina-akter-v1.tar
+                    sudo docker stop sabina-akter || true
+                    sudo docker rm sabina-akter || true
+                    sudo docker run -d \
+                      --name sabina-akter \
+                      --restart unless-stopped \
+                      -p 3000:3000 \
+                      sabina-akter:v1
+                    sudo docker ps
+                  "
