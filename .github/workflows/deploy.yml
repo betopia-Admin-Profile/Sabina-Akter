@@ -1,105 +1,80 @@
-name: Deploy Sabina Akter Portfolio
+name: Deploy Ilisher Bari Server
 
 on:
   push:
     branches:
-      - main
-
-env:
-  IMAGE_NAME: mayinuddinmunna/sabina-akter
-  CONTAINER_NAME: sabina-akter
-  APP_PORT: 3000
+      - "main"
+  pull_request:
+    branches:
+      - "main"
 
 jobs:
-  # ===============================
-  # JOB 1 — BUILD & PUSH IMAGE
-  # ===============================
   build:
-    name: Build & Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+      - name: Copying the code
+        uses: actions/checkout@v5
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          node-version: 22.14.0
 
-      - name: Build and Push Image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: Dockerfile
-          push: true
-          tags: |
-            ${{ env.IMAGE_NAME }}:v1
-            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+      - name: Check Node Version
+        run: |
+          node -v
+          npm -v
 
-  # ===============================
-  # JOB 2 — DEPLOY TO VM
-  # ===============================
+      - name: Install Dependencies
+        run: npm install --frozen-lockfile
+
   deploy:
-    name: Deploy to VM via SSH
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Setup SSH
+      - name: Copying the code
+        uses: actions/checkout@v5
+
+      - name: Deploy to Server via SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}
+          EC2_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
+          EC2_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}" > ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
 
-          # Create SSH config file
-          cat >> ~/.ssh/config << EOF
-          Host deploy-server
-            HostName ${{ secrets.HOST_SABINA_PORTFOLIO }}
-            User ${{ secrets.USER_SABINA_PORTFOLIO }}
-            IdentityFile ~/.ssh/id_rsa
-            StrictHostKeyChecking no
-            UserKnownHostsFile /dev/null
-          EOF
+          # Install Node.js on EC2
+          ssh $EC2_USER@$EC2_HOST "
+            sudo apt update
+            sudo apt install -y build-essential python3
+            curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            sudo npm install -g pm2
+          "
 
-          chmod 600 ~/.ssh/config
+          # Create deployment directory
+          ssh $EC2_USER@$EC2_HOST "sudo mkdir -p /var/www/Sabina-Akter"
+          ssh $EC2_USER@$EC2_HOST "sudo chown -R $EC2_USER:$EC2_USER /var/www/Sabina-Akter"
 
-      - name: Test SSH Connection
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
-            ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} \
-            "echo 'SSH connection successful!'"
+          # Copy files to the server
+          rsync -avz \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.github' \
+            . $EC2_USER@$EC2_HOST:/var/www/Sabina-Akter/
 
-      - name: Deploy Container
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
-            ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} \
-            /bin/bash << 'EOF'
-            set -e
+          # Install dependencies
+          ssh $EC2_USER@$EC2_HOST "cd /var/www/Sabina-Akter && npm install --production --legacy-peer-deps"
 
-            echo "🚀 Pulling latest image..."
-            docker pull ${{ env.IMAGE_NAME }}:v1
+          # Stop and restart the application - USING src/index.js
+          ssh $EC2_USER@$EC2_HOST "cd /var/www/Sabina-Akter && pm2 delete Sabina-Akter || true"
+          ssh $EC2_USER@$EC2_HOST "cd /var/www/Sabina-Akter && pm2 start src/index.js --name Sabina-Akter"
 
-            echo "🛑 Stopping old container..."
-            docker stop ${{ env.CONTAINER_NAME }} || true
-            docker rm ${{ env.CONTAINER_NAME }} || true
-
-            echo "▶️ Starting new container..."
-            docker run -d \
-              --name sabina-akter \  # This matches CONTAINER_NAME
-              --restart unless-stopped \
-              -p 127.0.0.1:3000:3000 \
-              mayinuddinmunna/sabina-akter:v1
-
-            echo "🧹 Cleaning up old images..."
-            docker image prune -f
-
-            echo "📦 Running containers:"
-            docker ps
-
-            echo "✅ Deployment completed successfully"
-          EOF
+          # Save PM2 configuration
+          ssh $EC2_USER@$EC2_HOST "pm2 save"
+          ssh $EC2_USER@$EC2_HOST "pm2 startup" || true
