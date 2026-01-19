@@ -38,7 +38,7 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:v1
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   # ===============================
@@ -68,7 +68,7 @@ jobs:
               set -e
 
               echo "🚀 Pulling latest image..."
-              docker pull mayinuddinmunna/sabina-akter:latest
+              docker pull mayinuddinmunna/sabina-akter:v1
 
               echo "🛑 Stopping old container..."
               docker stop sabina-akter || true
@@ -79,7 +79,7 @@ jobs:
                 --name sabina-akter \
                 --restart unless-stopped \
                 -p 127.0.0.1:3000:3000 \
-                mayinuddinmunna/sabina-akter:latest
+                mayinuddinmunna/sabina-akter:v1
 
               echo "📦 Running containers:"
               docker ps
