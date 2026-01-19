@@ -53,36 +53,53 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-
           echo "${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}" > ~/.ssh/id_rsa
-          sed -i 's/\r$//' ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-          ssh-keyscan -H ${{ secrets.HOST_SABINA_PORTFOLIO }} >> ~/.ssh/known_hosts
+          # Create SSH config file
+          cat >> ~/.ssh/config << EOF
+          Host deploy-server
+            HostName ${{ secrets.HOST_SABINA_PORTFOLIO }}
+            User ${{ secrets.USER_SABINA_PORTFOLIO }}
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+
+          chmod 600 ~/.ssh/config
+
+      - name: Test SSH Connection
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
+            ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} \
+            "echo 'SSH connection successful!'"
 
       - name: Deploy Container
         run: |
-          ssh \
-            ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} << 'EOF'
-              set -e
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \
+            ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} \
+            /bin/bash << 'EOF'
+            set -e
 
-              echo "🚀 Pulling latest image..."
-              docker pull mayinuddinmunna/sabina-akter:v1
+            echo "🚀 Pulling latest image..."
+            docker pull ${{ env.IMAGE_NAME }}:v1
 
-              echo "🛑 Stopping old container..."
-              docker stop sabina-akter || true
-              docker rm sabina-akter || true
+            echo "🛑 Stopping old container..."
+            docker stop ${{ env.CONTAINER_NAME }} || true
+            docker rm ${{ env.CONTAINER_NAME }} || true
 
-              echo "▶️ Starting new container..."
-              docker run -d \
-                --name sabina-akter \
-                --restart unless-stopped \
-                -p 127.0.0.1:3000:3000 \
-                mayinuddinmunna/sabina-akter:v1
+            echo "▶️ Starting new container..."
+            docker run -d \
+              --name sabina-akter \  # This matches CONTAINER_NAME
+              --restart unless-stopped \
+              -p 127.0.0.1:3000:3000 \
+              mayinuddinmunna/sabina-akter:v1
 
-              echo "📦 Running containers:"
-              docker ps
+            echo "🧹 Cleaning up old images..."
+            docker image prune -f
 
-              echo "✅ Deployment completed successfully"
+            echo "📦 Running containers:"
+            docker ps
+
+            echo "✅ Deployment completed successfully"
           EOF
