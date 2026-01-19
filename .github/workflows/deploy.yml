@@ -2,83 +2,87 @@ name: Deploy Sabina Akter Portfolio
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: mayinuddinmunna/sabina-akter
+  CONTAINER_NAME: sabina-akter
+  APP_PORT: 3000
 
 jobs:
-  build-and-deploy:
+  # ===============================
+  # JOB 1 — BUILD & PUSH IMAGE
+  # ===============================
+  build:
+    name: Build & Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Next.js application
-        run: npm run build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+      - name: Build and Push Image
+        uses: docker/build-push-action@v5
         with:
           context: .
+          file: Dockerfile
           push: true
           tags: |
-            mayinuddinmunna/sabina-akter:v1
-            mayinuddinmunna/sabina-akter:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
+  # ===============================
+  # JOB 2 — DEPLOY TO VM
+  # ===============================
+  deploy:
+    name: Deploy to VM via SSH
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
       - name: Setup SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}
-          SSH_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
-          SSH_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+
+          echo "${{ secrets.SSH_KEY_SABINA_PORTFOLIO }}" > ~/.ssh/id_rsa
+          sed -i 's/\r$//' ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
 
-      - name: Deploy to EC2
-        env:
-          SSH_USER: ${{ secrets.USER_SABINA_PORTFOLIO }}
-          SSH_HOST: ${{ secrets.HOST_SABINA_PORTFOLIO }}
+          ssh-keyscan -H ${{ secrets.HOST_SABINA_PORTFOLIO }} >> ~/.ssh/known_hosts
+
+      - name: Deploy Container
         run: |
-          ssh -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST << 'EOF'
+          ssh \
+            ${{ secrets.USER_SABINA_PORTFOLIO }}@${{ secrets.HOST_SABINA_PORTFOLIO }} << 'EOF'
+              set -e
 
-          # Pull latest image
-          sudo docker pull mayinuddinmunna/sabina-akter:v1
+              echo "🚀 Pulling latest image..."
+              docker pull mayinuddinmunna/sabina-akter:latest
 
-          # Stop and remove old container
-          sudo docker stop sabina-akter 2>/dev/null || true
-          sudo docker rm sabina-akter 2>/dev/null || true
+              echo "🛑 Stopping old container..."
+              docker stop sabina-akter || true
+              docker rm sabina-akter || true
 
-          # Run new container
-          sudo docker run -d \
-            --name sabina-akter \
-            --restart unless-stopped \
-            -p 3000:3000 \
-            mayinuddinmunna/sabina-akter:v1
+              echo "▶️ Starting new container..."
+              docker run -d \
+                --name sabina-akter \
+                --restart unless-stopped \
+                -p 127.0.0.1:3000:3000 \
+                mayinuddinmunna/sabina-akter:latest
 
-          # Update Nginx configuration if needed
-          echo "Server is running on port 3000"
-          echo "Update your Nginx configuration at /etc/nginx/sites-available/"
+              echo "📦 Running containers:"
+              docker ps
 
-          # Check status
-          sleep 3
-          sudo docker ps
-          curl -f http://localhost:3000 || echo "App might need more time to start"
-
+              echo "✅ Deployment completed successfully"
           EOF
