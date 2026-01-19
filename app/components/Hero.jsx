@@ -3,6 +3,14 @@ import Image from "next/image";
 import { FaLinkedinIn, FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function Hero() {
+
+  const socials = [
+  { icon: FaLinkedinIn, link: "https://www.linkedin.com/in/sabina-akter-8b7165242/" },
+  { icon: FaFacebookF, link: "https://www.facebook.com/sabina.bdcalling/" },
+  { icon: FaInstagram, link: "https://www.instagram.com/yourprofile" },
+  { icon: FaTwitter, link: "https://twitter.com/yourprofile" },
+];
+
   return (
     <section className="relative w-full min-h-[calc(100vh-6rem)] flex items-center overflow-hidden bg-slate-50/50">
       {/* Background Decorative Elements */}
@@ -74,16 +82,18 @@ export default function Hero() {
               CONNECT WITH ME
             </a>
             <div className="flex gap-4 lg:border-l border-slate-200 lg:pl-8">
-              {[FaLinkedinIn, FaFacebookF, FaInstagram, FaTwitter].map((Icon, idx) => (
-                <a
-                  key={idx}
-                  href="/contact"
-                  className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-500 hover:text-gold hover:border-gold transition-all duration-300 shadow-sm hover:shadow-md"
-                >
-                  <Icon size={14} />
-                </a>
-              ))}
-            </div>
+  {socials.map((item, idx) => (
+    <a
+      key={idx}
+      href={item.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-500 hover:text-gold hover:border-gold transition-all duration-300 shadow-sm hover:shadow-md"
+    >
+      <item.icon size={14} />
+    </a>
+  ))}
+</div>
           </div>
 
 
