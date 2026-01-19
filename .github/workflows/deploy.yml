@@ -69,12 +69,21 @@ jobs:
             . $EC2_USER@$EC2_HOST:/var/www/Sabina-Akter/
 
           # Install dependencies
-          ssh $EC2_USER@$EC2_HOST "cd /var/www/Sabina-Akter && npm install --production --legacy-peer-deps"
+              ssh $EC2_USER@$EC2_HOST "
+                cd /var/www/Sabina-Akter &&
+                npm install --omit=dev
+              "
 
-          # Stop and restart the application - USING src/index.js
-          ssh $EC2_USER@$EC2_HOST "cd /var/www/Sabina-Akter && pm2 delete Sabina-Akter || true"
-          ssh $EC2_USER@$EC2_HOST "cd /var/www/Sabina-Akter && pm2 start src/index.js --name Sabina-Akter"
+              # Build Next.js
+              ssh $EC2_USER@$EC2_HOST "
+                cd /var/www/Sabina-Akter &&
+                npm run build
+              "
 
-          # Save PM2 configuration
-          ssh $EC2_USER@$EC2_HOST "pm2 save"
-          ssh $EC2_USER@$EC2_HOST "pm2 startup" || true
+              # Restart app with PM2
+              ssh $EC2_USER@$EC2_HOST "
+                pm2 delete Sabina-Akter || true
+                cd /var/www/Sabina-Akter &&
+                pm2 start npm --name Sabina-Akter -- start
+                pm2 save
+              "
