@@ -40,7 +40,7 @@ export default function Footer() {
             <p className="text-slate-400 leading-relaxed max-w-sm">
               Empowering the next generation of leaders through innovation,
               strategic mentorship, and sustainable business practices.
-              Building a future where opportunity knows no
+              Building a future where opportunity knows no bounds.
             </p>
 
             {/* Contact Info */}
