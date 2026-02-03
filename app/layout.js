@@ -20,10 +20,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${outfit.variable} font-sans antialiased bg-white text-slate-900`}
+        className={`${outfit.variable} font-sans antialiased bg-white text-slate-900 selection:bg-orange-500 selection:text-white`}
       >
         <Navbar />
-        <main className="min-h-screen pt-20">{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
         <BackToTop />
       </body>

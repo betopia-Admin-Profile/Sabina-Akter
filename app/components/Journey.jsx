@@ -1,113 +1,142 @@
 "use client";
-import React from 'react';
-import { FaFlag, FaAward, FaBuilding, FaBriefcase, FaRocket } from "react-icons/fa";
+import Link from "next/link";
+import React from "react";
+import { Flag, Award, Building2, Briefcase, Rocket } from "lucide-react";
 
 const timelineEvents = [
   {
     year: "2014",
     title: "The Inception",
-    description: "Started the journey with a vision to create opportunities and contribute to the digital landscape of Bangladesh.",
-    icon: FaFlag,
+    description: "Started the journey with a vision to create opportunities.",
+    fullDescription:
+      "Started the journey with a vision to create opportunities and contribute to the digital landscape of Bangladesh.",
+    icon: Flag,
+    color: "from-blue-500 to-cyan-500",
+    bg: "bg-blue-50",
   },
   {
     year: "2017",
     title: "Co-Founding Bdcalling IT",
-    description: "Co-founded Bdcalling IT Ltd, laying the foundation for what would become one of the nation's largest IT firms.",
-    icon: FaBriefcase,
+    description: "Laid the foundation for a leading IT firm.",
+    fullDescription:
+      "Co-founded Bdcalling IT Ltd, laying the foundation for what would become one of the nation's largest IT firms.",
+    icon: Briefcase,
+    color: "from-purple-500 to-pink-500",
+    bg: "bg-purple-50",
   },
   {
     year: "2020",
     title: "National Recognition",
-    description: "Received the prestigious BASIS National ICT Award for outstanding contribution to the IT industry.",
-    icon: FaAward,
+    description: "Received the prestigious BASIS National ICT Award.",
+    fullDescription:
+      "Received the prestigious BASIS National ICT Award for outstanding contribution to the IT industry.",
+    icon: Award,
+    color: "from-amber-500 to-orange-500",
+    bg: "bg-amber-50",
   },
   {
     year: "2023",
     title: "Global Expansion",
-    description: "Expanded operations to 22+ countries, establishing a robust global footprint for Betopia Group.",
-    icon: FaRocket,
+    description: "Expanded operations to 22+ countries.",
+    fullDescription:
+      "Expanded operations to 22+ countries, establishing a robust global footprint for Betopia Group.",
+    icon: Rocket,
+    color: "from-emerald-500 to-teal-500",
+    bg: "bg-emerald-50",
   },
   {
     year: "2025",
     title: "Chairperson, Betopia Group",
-    description: "Assumed the role of Chairperson, leading a diversified conglomerate of 3,500+ employees towards 2030 vision.",
-    icon: FaBuilding,
+    description: "Leading 3,500+ employees towards Vision 2030.",
+    fullDescription:
+      "Assumed the role of Chairperson, leading a diversified conglomerate of 3,500+ employees towards 2030 vision.",
+    icon: Building2,
+    color: "from-rose-500 to-red-500",
+    bg: "bg-rose-50",
   },
 ];
 
 export default function Journey() {
   return (
-    <section id="journey" className="py-24 bg-white relative overflow-hidden">
+    <section id="journey" className="relative py-2 bg-white overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[10%] -right-[10%] w-[500px] h-[500px] bg-slate-50 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-[10%] -left-[10%] w-[500px] h-[500px] bg-slate-50 rounded-full blur-3xl opacity-50"></div>
+      <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
+        <div className="absolute top-[20%] right-[5%] w-[500px] h-[500px] bg-slate-100 rounded-full blur-[100px] opacity-60"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-
-        <div className="text-center mb-24 space-y-4">
-          <h4 className="text-xs font-bold tracking-[0.2em] text-gold uppercase">
-            Milestones
-          </h4>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">
-            Entrepreneurial <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-500">
-              Journey
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Header */}
+        <div className="mb-20">
+          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
+            The Entrepreneurial <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-600 to-orange-600">
+              Chronicles.
             </span>
           </h2>
-          <p className="max-w-xl mx-auto text-slate-500 leading-relaxed">
-            A decade of innovation, leadership, and unwavering commitment to transforming the digital ecosystem of Bangladesh.
-          </p>
         </div>
 
-        <div className="relative">
-          {/* Vertical Gradient Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-slate-100 via-gold/30 to-slate-100 hidden md:block rounded-full"></div>
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {timelineEvents.map((event, index) => (
+            <div
+              key={index}
+              className="group relative bg-white p-8 rounded-2xl border border-slate-100 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between h-full overflow-hidden"
+            >
+              {/* Gradient Border Overlay on Hover */}
+              <div
+                className={`absolute top-0 left-0 w-full h-1 bg-linear-to-r ${event.color} scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}
+              ></div>
 
-          <div className="space-y-20 relative">
-            {timelineEvents.map((event, index) => (
-              <div key={index} className={`flex flex-col md:flex-row items-center gap-12 group ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-
-                {/* Content Side */}
-                <div className="flex-1 w-full md:w-1/2">
-                  <div className={`
-                      bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm 
-                      hover:shadow-2xl hover:border-gold/20 hover:-translate-y-1
-                      transition-all duration-300 relative
-                      ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}
-                   `}>
-                    {/* Connector Dot */}
-                    <div className={`hidden md:block absolute top-[50%] w-4 h-4 rounded-full border-4 border-white bg-gold/50 
-                        ${index % 2 === 0 ? '-left-[58px]' : '-right-[58px]'}
-                        top-1/2 -translate-y-1/2
-                     `}></div>
-
-                    <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-slate-900 text-white text-xs font-bold tracking-widest shadow-md">
-                      {event.year}
-                    </span>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-gold transition-colors">
-                      {event.title}
-                    </h3>
-                    <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                      {event.description}
-                    </p>
+              <div>
+                <div className="flex justify-between items-start mb-8">
+                  <span className="text-4xl font-extrabold text-slate-200 group-hover:text-slate-900 transition-colors duration-500">
+                    {event.year}
+                  </span>
+                  <div
+                    className={`w-14 h-14 ${event.bg} rounded-2xl flex items-center justify-center text-xl shadow-inner group-hover:scale-110 transition-transform duration-500`}
+                  >
+                    <event.icon
+                      className={`w-6 h-6 text-slate-400 group-hover:text-slate-900 transition-colors duration-500`}
+                    />
                   </div>
                 </div>
 
-                {/* Center Icon */}
-                <div className="relative flex items-center justify-center w-20 h-20 shrink-0 bg-white rounded-full border border-slate-100 z-10 text-slate-300 group-hover:text-gold group-hover:scale-110 group-hover:border-gold/30 transition-all duration-500 shadow-xl">
-                  <div className="absolute inset-2 bg-slate-50 rounded-full"></div>
-                  <event.icon className="w-8 h-8 relative z-10" />
-                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-amber-600 transition-colors">
+                  {event.title}
+                </h3>
 
-                {/* Empty Side for Balance */}
-                <div className="flex-1 w-full md:w-1/2 hidden md:block"></div>
+                <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                  {event.fullDescription}
+                </p>
               </div>
-            ))}
+
+              {/* Decorative Circle */}
+              <div
+                className={`absolute -bottom-10 -right-10 w-32 h-32 bg-linear-to-br ${event.color} rounded-full opacity-0 group-hover:opacity-5 blur-2xl transition-opacity duration-500 pointer-events-none`}
+              ></div>
+            </div>
+          ))}
+
+          {/* Final "Present" Card */}
+          <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 flex flex-col justify-center items-center text-center group cursor-pointer overflow-hidden relative">
+            <div className="absolute inset-0 bg-linear-to-br from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div className="relative z-10">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-white mb-6 mx-auto group-hover:scale-110 transition-transform">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">
+                What&apos;s Next?
+              </h3>
+              <p className="text-slate-400 text-sm mb-6">
+                The journey continues towards 2030.
+              </p>
+              <div className="inline-flex items-center text-amber-500 font-bold text-xs uppercase tracking-widest border-b border-amber-500 pb-1">
+                <Link href="/vision">View Future Vision</Link>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );

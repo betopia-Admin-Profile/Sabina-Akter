@@ -1,11 +1,11 @@
 "use client";
 import { FaQuoteLeft } from "react-icons/fa";
-import { TypeAnimation } from 'react-type-animation';
+import { TypeAnimation } from "react-type-animation";
 
 export default function ChairmanMessage() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-900 via-gold to-slate-900"></div>
+      <div className="absolute top-0 left-0 w-full"></div>
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <FaQuoteLeft className="text-4xl text-gold mx-auto mb-8 opacity-50" />
@@ -18,7 +18,7 @@ export default function ChairmanMessage() {
             ]}
             wrapper="span"
             speed={65}
-            style={{ display: 'inline-block' }}
+            style={{ display: "inline-block" }}
             cursor={true}
           />
         </div>

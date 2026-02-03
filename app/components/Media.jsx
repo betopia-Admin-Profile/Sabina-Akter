@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
 import { FaArrowRight, FaCalendarAlt } from "react-icons/fa";
-import newsData from '../data/News.json';
+import newsData from "../data/News.json";
 import Image from "next/image";
 
 const NewsItems = newsData.newsItems;
-
 
 export default function NewsSection() {
   return (
@@ -14,18 +13,24 @@ export default function NewsSection() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-slate-50/50 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="space-y-4 max-w-2xl">
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-              News & <span className="text-slate-400 font-serif italic">Insights</span>
+              News &{" "}
+              <span className="text-brand-bright-orange font-serif italic">
+                Insights
+              </span>
             </h2>
             <p className="text-slate-500 leading-relaxed text-sm md:text-base">
-              Stay updated with the latest announcements, press releases, and thought leadership from Sabina Akter and the Betopia Group.
+              Stay updated with the latest announcements, press releases, and
+              thought leadership from Sabina Akter and the Betopia Group.
             </p>
           </div>
-          <Link href="/news" className="group flex items-center gap-3 text-xs font-bold tracking-widest text-slate-900 hover:text-gold transition-colors border-b border-slate-200 pb-1 hover:border-gold">
+          <Link
+            href="/news"
+            className="group flex items-center gap-3 text-xs font-bold tracking-widest text-slate-900 hover:text-gold transition-colors border-b border-slate-200 pb-1 hover:border-gold"
+          >
             VIEW ARCHIVE
             <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform duration-300" />
           </Link>
@@ -79,7 +84,6 @@ export default function NewsSection() {
             </Link>
           ))}
         </div>
-
       </div>
     </section>
   );
