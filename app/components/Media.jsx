@@ -47,7 +47,7 @@ export default function NewsSection() {
               href={`/news/${item.id}`}
               className="group block h-full"
             >
-              <article className="h-full flex flex-col bg-white rounded-[2rem] border border-slate-100 hover:border-slate-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              <article className="h-full flex flex-col bg-white rounded-[1rem] border border-slate-100 hover:border-slate-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
                 {/* Image Container with Zoom Effect */}
                 <div className="relative h-64 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-60 z-10"></div>
