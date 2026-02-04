@@ -209,9 +209,9 @@ export default function EcosystemClient() {
               <span className="h-px w-12 bg-amber-500"></span>
             </div>
 
-            <h1 className="text-6xl lg:text-8xl font-black text-slate-900 mb-8 leading-[0.9] tracking-tight">
+            <h1 className="text-6xl lg:text-8xl font-bold text-slate-900 mb-8 leading-[0.9] tracking-tight">
               Betopia <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-600 to-orange-600">
+              <span className="text-transparent font-black bg-clip-text bg-linear-to-r from-amber-600 to-orange-600">
                 Ecosystem
               </span>
             </h1>

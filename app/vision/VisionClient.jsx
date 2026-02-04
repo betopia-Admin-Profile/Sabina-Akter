@@ -131,17 +131,6 @@ export default function VisionClient() {
                     By year 2030
                   </div>
                 </div>
-
-                {/* Floating Elements */}
-                <div className="absolute top-0 right-0 bg-white/50 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-lg text-[10px] font-bold tracking-widest uppercase text-slate-600 animate-float">
-                  Innovation Hub
-                </div>
-                <div
-                  className="absolute bottom-10 left-0 bg-amber-50 backdrop-blur-md px-6 py-3 rounded-2xl border border-amber-100 shadow-lg text-[10px] font-bold tracking-widest uppercase text-amber-600 animate-float"
-                  style={{ animationDelay: "1s" }}
-                >
-                  Economic Driver
-                </div>
               </div>
             </div>
           </div>

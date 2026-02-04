@@ -116,6 +116,10 @@ const timelineEvents = [
 
 export default function JourneyClient() {
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
+  const { ref: nextRef, inView: nextInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -154,8 +158,7 @@ export default function JourneyClient() {
 
             <p className="text-xl text-slate-500 leading-relaxed max-w-3xl mx-auto">
               From a humble beginning to leading a global conglomerate. Explore
-              the milestones that define the entrepreneurial saga of Sabina
-              Akter.
+              the milestones that define the Entrepreneur saga of Sabina Akter.
             </p>
           </div>
         </div>
@@ -170,7 +173,15 @@ export default function JourneyClient() {
             ))}
 
             {/* "What's Next" Card */}
-            <div className="group relative bg-slate-900 rounded-[2.5rem] p-10 flex flex-col justify-center items-center text-center overflow-hidden h-full min-h-[400px] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+            <div
+              ref={nextRef}
+              className={`group relative bg-slate-900 rounded-xl p-10 flex flex-col justify-center items-center text-center overflow-hidden h-full min-h-[400px] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+                nextInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${timelineEvents.length * 100}ms` }}
+            >
               <div className="absolute inset-0 bg-linear-to-br from-amber-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div className="relative z-10">
@@ -221,7 +232,7 @@ function TimelineCard({ event, index }) {
   return (
     <div
       ref={ref}
-      className={`group relative bg-white rounded-[2.5rem] p-8 border ${event.border} shadow-lg shadow-slate-100/50 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full overflow-hidden ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+      className={`group relative bg-white rounded-xl p-8 border border-slate-200 shadow-lg shadow-slate-100/50 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full overflow-hidden ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Background Gradient */}
@@ -235,7 +246,7 @@ function TimelineCard({ event, index }) {
             {event.year}
           </span>
           <div
-            className={`w-14 h-14 ${event.bg} rounded-2xl flex items-center justify-center ${event.accent} transition-transform duration-500 group-hover:scale-110`}
+            className={`w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 transition-transform duration-500 group-hover:scale-110`}
           >
             <event.icon size={24} />
           </div>
@@ -259,9 +270,7 @@ function TimelineCard({ event, index }) {
               key={idx}
               className="flex items-center gap-3 text-sm text-slate-600"
             >
-              <div
-                className={`w-1.5 h-1.5 rounded-full ${event.accent.replace("text-", "bg-")}`}
-              ></div>
+              <div className={`w-1.5 h-1.5 rounded-full bg-amber-600`}></div>
               {detail}
             </div>
           ))}

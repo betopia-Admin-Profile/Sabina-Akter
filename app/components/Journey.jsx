@@ -68,7 +68,7 @@ export default function Journey() {
         {/* Header */}
         <div className="mb-20">
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-            The Entrepreneurial <br />
+            The Entrepreneur <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-600 to-orange-600">
               Chronicles.
             </span>
