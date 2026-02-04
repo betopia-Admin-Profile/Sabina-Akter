@@ -68,7 +68,7 @@ export default function ProfessionalAchievements() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div
-          className={`mb-16 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`mb-6 md:mb-12 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
           <div className="flex items-center gap-2 mb-3">
             <span className="h-0.5 w-10 bg-brand-bright-orange"></span>
@@ -156,18 +156,15 @@ export default function ProfessionalAchievements() {
             </div>
 
             {/* Additional Highlight Box */}
-            <div className="mt-8 bg-slate-900 p-6 rounded-2xl text-white relative overflow-hidden">
+            <div className="mt-8 bg-brand-bright-orange p-6 rounded-2xl text-white relative overflow-hidden">
               <div className="relative z-10 flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm text-slate-400 uppercase tracking-widest font-bold mb-1">
+                  <p className="text-sm text-slate-100 uppercase tracking-widest font-bold mb-1">
                     Featured In
                   </p>
                   <p className="text-lg font-medium leading-relaxed">
-                    Recognized by top industry publications for contribution to{" "}
-                    <span className="text-brand-bright-orange">
-                      Tech & Women Empowerment
-                    </span>
-                    .
+                    Recognized by top industry publications for contribution to
+                    Tech & Women Empowerment.
                   </p>
                 </div>
               </div>

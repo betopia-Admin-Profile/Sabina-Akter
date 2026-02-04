@@ -85,15 +85,48 @@ export default function NewsDetail() {
           </p>
         </div>
 
-        {/* Featured Image */}
-        <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden mb-16 shadow-2xl shadow-slate-200/50 border border-slate-100">
-          <Image
-            src={newsItem.image}
-            alt={newsItem.title}
-            fill
-            className="w-full h-full object-cover"
-            priority
-          />
+        {/* Formal Photo Grid - Replacing Single Featured Image */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16 h-auto lg:h-[600px]">
+          {/* Large Main Image */}
+          <div className="md:col-span-2 lg:col-span-2 lg:row-span-2 relative rounded-3xl overflow-hidden shadow-lg border border-slate-100 group">
+            <Image
+              src={newsItem.image}
+              alt={newsItem.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              priority
+            />
+          </div>
+
+          {/* Secondary Vertical Image 1 */}
+          <div className="hidden md:block relative rounded-3xl overflow-hidden shadow-lg border border-slate-100 group lg:row-span-2">
+            <Image
+              src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1000"
+              alt="Formal Session"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+
+          {/* Small Grid Images */}
+          <div className="grid grid-rows-2 gap-4 lg:col-span-1 lg:row-span-2">
+            <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-100 group h-48 lg:h-auto">
+              <Image
+                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1000"
+                alt="Meeting"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-100 group h-48 lg:h-auto">
+              <Image
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1000"
+                alt="Office"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Article Content */}

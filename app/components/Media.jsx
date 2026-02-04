@@ -8,7 +8,10 @@ const NewsItems = newsData.newsItems;
 
 export default function NewsSection() {
   return (
-    <section id="news" className="py-24 bg-white relative overflow-hidden">
+    <section
+      id="news"
+      className="py-10 md:py-24 bg-white relative overflow-hidden"
+    >
       {/* Subtle Background Pattern */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-slate-50/50 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
 

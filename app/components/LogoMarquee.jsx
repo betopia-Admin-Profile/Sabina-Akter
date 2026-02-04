@@ -33,7 +33,7 @@ export default function LogoMarquee() {
           {/* Marquee Track - Controlled by global CSS (120s duration, group hover pause) */}
           <div className="flex animate-scroll items-center">
             {/* First Set */}
-            <div className="flex gap-10 items-center px-10 shrink-0">
+            <div className="flex gap-5 items-center px-10 shrink-0">
               {logos.map((logo, index) => (
                 <div
                   key={`logo-1-${index}`}
@@ -50,7 +50,7 @@ export default function LogoMarquee() {
             </div>
 
             {/* Second Set */}
-            <div className="flex gap-10 items-center px-10 shrink-0">
+            <div className="flex gap-5 items-center px-10 shrink-0">
               {logos.map((logo, index) => (
                 <div
                   key={`logo-2-${index}`}

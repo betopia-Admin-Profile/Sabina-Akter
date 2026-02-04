@@ -37,7 +37,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-950 text-white pt-20 pb-10 mt-24 relative overflow-hidden">
+    <footer className="bg-slate-950 text-white pt-20 pb-10 mt-4 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
 
@@ -142,10 +142,15 @@ export default function Footer() {
                   <p className="text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">
                     Corporate Office
                   </p>
-                  <p className="text-white text-sm leading-relaxed">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Level+6,+59+%26+61,+South+Avenue,+Lotus+Kamal+Tower-2,+Gulshan+Ave,+Dhaka+1212"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white text-sm leading-relaxed hover:text-brand-bright-orange transition-colors"
+                  >
                     Level 6, 59 & 61, South Avenue, Lotus Kamal Tower-2, Gulshan
                     Ave, Dhaka 1212.
-                  </p>
+                  </a>
                 </div>
               </div>
 
@@ -170,7 +175,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-slate-900 mb-8"></div>
+        <div className="w-full h-px bg-slate-900 mb-4"></div>
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
